@@ -14,17 +14,17 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class UserRequestDTO {
     @NotNull
-    @Length(min=1, max=128, message = "name长度不正确")
+    @Length(min=1, max=128, message = "name长度不合法")
     private String name;
 
     @NotNull
-    @Min(value = 17, message = "age长度不正确")
+    @Min(value = 17, message = "age不合法")
     private long age;
 
     @NotNull
-    @Length(min=8 ,max = 512, message = "avatar长度不正确")
+    @Length(min=8 ,max = 512, message = "avatar长度不合法")
     private String avatar;
 
-    @Length(min=0, max = 1024, message = "description长度不正确")
+    @Length(min=0, max = 1024, message = "description长度不合法")
     private String description;
 }
