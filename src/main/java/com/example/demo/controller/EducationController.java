@@ -1,13 +1,13 @@
 package com.example.demo.controller;
 
+import com.example.demo.controller.responsedto.EducationResponseDTO;
 import com.example.demo.model.Education;
 import com.example.demo.sevice.EducationService;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -21,7 +21,21 @@ public class EducationController {
     }
 
     @GetMapping("/users/{id}/educations")
-    public List<Education> getAllEducationsByUserId(@PathVariable long id) {
-        return educationService.getEducationsByUserId(id);
+    public List<EducationResponseDTO> getAllEducationsByUserId(@PathVariable long id) {
+        List<Education> educations = educationService.getEducationsByUserId(id);
+        List<EducationResponseDTO> educationResponseDTOS = new ArrayList<>();
+        for(Education education:educations) {
+            educationResponseDTOS.add(new EducationResponseDTO(education.getYear(), education.getTittle(), education.getDescription()));
+        }
+
+        return educationResponseDTOS;
+    }
+
+    @PostMapping("/users/{id}/educations")
+    public Education getAllEducationsByUserId(@PathVariable long id, @RequestBody @Valid Education edu) {
+        Education education = new Education(
+                id, edu.getYear(), edu.getTittle(), edu.getDescription()
+        );
+        return educationService.addEducation(education);
     }
 }

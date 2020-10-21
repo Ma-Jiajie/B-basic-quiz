@@ -1,22 +1,16 @@
-package com.example.demo.model;
+package com.example.demo.controller.responsedto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Education {
-
-    @NotNull
-    private long userId;
-
+public class EducationResponseDTO {
     @NotNull
     private long year;
 

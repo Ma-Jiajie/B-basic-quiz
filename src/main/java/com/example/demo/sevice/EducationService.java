@@ -11,4 +11,8 @@ public class EducationService {
     public List<Education>  getEducationsByUserId(long id){
         return EducationDataBaseMock.getEducationsByUserId(id);
     }
+    public Education addEducation(Education education) {
+        EducationDataBaseMock.add(education);
+        return education;
+    }
 }
