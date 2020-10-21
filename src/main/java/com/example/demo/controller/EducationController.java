@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping
 @Validated
+@CrossOrigin
 public class EducationController {
     private EducationService educationService;
 
