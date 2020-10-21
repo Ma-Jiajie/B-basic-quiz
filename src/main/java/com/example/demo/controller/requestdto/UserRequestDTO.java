@@ -1,7 +1,5 @@
-package com.example.demo.model;
+package com.example.demo.controller.requestdto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,10 +11,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
-    @NotNull
-    private long id;
-
+public class UserRequestDTO {
     @NotNull
     @Max(value = 128, message = "")
     @Min(value = 1, message = "")

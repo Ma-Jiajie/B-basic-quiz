@@ -16,4 +16,7 @@ public class UserService {
         if(optionalUser.isEmpty()) throw new Exception("no people");
         return optionalUser.get();
     }
+    public User addUser(User user) {
+        return UserDataBaseMock.add(user);
+    }
 }

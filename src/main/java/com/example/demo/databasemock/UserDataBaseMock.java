@@ -22,4 +22,9 @@ public class UserDataBaseMock {
         return users.stream().filter(user -> user.getId()==id).findFirst();
     }
 
+    public static User add(User user) {
+        users.add(user);
+        return user;
+    }
+
 }

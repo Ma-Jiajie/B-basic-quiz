@@ -1,12 +1,12 @@
 package com.example.demo.controller;
 
+import com.example.demo.controller.requestdto.UserRequestDTO;
 import com.example.demo.model.User;
 import com.example.demo.sevice.UserService;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping
@@ -21,5 +21,12 @@ public class UserController {
     @GetMapping("/users/{id}")
     public User getUserById(@PathVariable long id) throws Exception {
         return userService.getUserById(id);
+    }
+
+    @PostMapping("/users")
+    public User addUser(@RequestBody @Valid UserRequestDTO userRequestDTO) {
+        long id = userService.getAllUsers().size();
+        User user = new User(id+1,userRequestDTO.getName(),userRequestDTO.getAge(),userRequestDTO.getAvatar(),userRequestDTO.getDescription());
+        return userService.addUser(user);
     }
 }
