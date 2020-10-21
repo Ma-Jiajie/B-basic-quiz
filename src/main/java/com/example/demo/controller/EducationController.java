@@ -14,7 +14,6 @@ import java.util.List;
 @RestController
 @RequestMapping
 @Validated
-@CrossOrigin
 public class EducationController {
     private EducationService educationService;
 
@@ -23,6 +22,7 @@ public class EducationController {
     }
 
     @GetMapping("/users/{id}/educations")
+    @CrossOrigin
     public List<EducationResponseDTO> getAllEducationsByUserId(@PathVariable long id) {
         List<Education> educations = educationService.getEducationsByUserId(id);
         List<EducationResponseDTO> educationResponseDTOS = new ArrayList<>();
@@ -34,6 +34,7 @@ public class EducationController {
     }
 
     @PostMapping("/users/{id}/educations")
+    @CrossOrigin
     public Education getAllEducationsByUserId(@PathVariable long id, @RequestBody @Valid EducationRequestDTO educationRequestDTO) {
         Education education = new Education(
                 id, educationRequestDTO.getYear(), educationRequestDTO.getTitle(), educationRequestDTO.getDescription()
