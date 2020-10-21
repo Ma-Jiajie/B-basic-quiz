@@ -23,8 +23,7 @@ public class User {
     private String name;
 
     @NotNull
-    @Min(value = 1, message = "age长度不正确")
-    @Min(value = 16, message = "age长度不正确")
+    @Min(value = 17, message = "age长度不正确")
     private long age;
 
     @NotNull
