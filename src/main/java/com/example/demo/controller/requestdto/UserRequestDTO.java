@@ -3,6 +3,7 @@ package com.example.demo.controller.requestdto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -13,20 +14,18 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class UserRequestDTO {
     @NotNull
-    @Max(value = 128, message = "")
-    @Min(value = 1, message = "")
+    @Length(min=1, max=128, message = "name长度不正确")
     private String name;
 
     @NotNull
-    @Min(value = 16, message = "")
+    @Min(value = 1, message = "age长度不正确")
+    @Min(value = 16, message = "age长度不正确")
     private long age;
 
     @NotNull
-    @Max(value = 512, message = "")
-    @Min(value = 8, message = "")
+    @Length(min=8 ,max = 2512, message = "avatar长度不正确")
     private String avatar;
 
-    @Max(value = 1024, message = "")
-    @Min(value = 0, message = "")
+    @Length(min=0, max = 1024, message = "description长度不正确")
     private String description;
 }

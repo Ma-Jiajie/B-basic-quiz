@@ -17,6 +17,7 @@ public class UserService {
         return optionalUser.get();
     }
     public User addUser(User user) {
-        return UserDataBaseMock.add(user);
+        UserDataBaseMock.add(user);
+        return user;
     }
 }
