@@ -14,6 +14,9 @@ import javax.validation.constraints.NotNull;
 public class Education {
 
     @NotNull
+    private long userId;
+
+    @NotNull
     private long year;
 
     @NotNull

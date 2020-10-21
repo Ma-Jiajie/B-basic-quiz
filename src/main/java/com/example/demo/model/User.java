@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,6 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class User {
 
-    @JsonIgnore
     private long id;
 
     @NotNull
@@ -31,7 +31,6 @@ public class User {
     @Min(value = 8, message = "")
     private String avatar;
 
-    @JsonIgnore
     @Max(value = 1024, message = "")
     @Min(value = 0, message = "")
     private String description;
