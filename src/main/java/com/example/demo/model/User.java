@@ -27,7 +27,7 @@ public class User {
     private long age;
 
     @NotNull
-    @Length(min=8 ,max = 2512, message = "avatar长度不正确")
+    @Length(min=8 ,max = 512, message = "avatar长度不正确")
     private String avatar;
 
     @Length(min=0, max = 1024, message = "description长度不正确")
