@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import com.example.demo.controller.requestdto.EducationRequestDTO;
-import com.example.demo.controller.responsedto.EducationResponseDTO;
 import com.example.demo.model.Education;
 import com.example.demo.sevice.EducationService;
 import org.springframework.validation.annotation.Validated;
@@ -23,14 +22,8 @@ public class EducationController {
 
     @GetMapping("/users/{id}/educations")
     @CrossOrigin
-    public List<EducationResponseDTO> getAllEducationsByUserId(@PathVariable long id) {
-        List<Education> educations = educationService.getEducationsByUserId(id);
-        List<EducationResponseDTO> educationResponseDTOS = new ArrayList<>();
-        for(Education education:educations) {
-            educationResponseDTOS.add(new EducationResponseDTO(education.getYear(), education.getTitle(), education.getDescription()));
-        }
-
-        return educationResponseDTOS;
+    public List<Education> getAllEducationsByUserId(@PathVariable long id) {
+        return educationService.getEducationsByUserId(id);
     }
 
     @PostMapping("/users/{id}/educations")
