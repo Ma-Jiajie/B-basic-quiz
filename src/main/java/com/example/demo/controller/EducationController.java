@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.controller.requestdto.EducationRequestDTO;
 import com.example.demo.controller.responsedto.EducationResponseDTO;
 import com.example.demo.model.Education;
 import com.example.demo.sevice.EducationService;
@@ -25,16 +26,16 @@ public class EducationController {
         List<Education> educations = educationService.getEducationsByUserId(id);
         List<EducationResponseDTO> educationResponseDTOS = new ArrayList<>();
         for(Education education:educations) {
-            educationResponseDTOS.add(new EducationResponseDTO(education.getYear(), education.getTittle(), education.getDescription()));
+            educationResponseDTOS.add(new EducationResponseDTO(education.getYear(), education.getTitle(), education.getDescription()));
         }
 
         return educationResponseDTOS;
     }
 
     @PostMapping("/users/{id}/educations")
-    public Education getAllEducationsByUserId(@PathVariable long id, @RequestBody @Valid Education edu) {
+    public Education getAllEducationsByUserId(@PathVariable long id, @RequestBody @Valid EducationRequestDTO educationRequestDTO) {
         Education education = new Education(
-                id, edu.getYear(), edu.getTittle(), edu.getDescription()
+                id, educationRequestDTO.getYear(), educationRequestDTO.getTitle(), educationRequestDTO.getDescription()
         );
         return educationService.addEducation(education);
     }
