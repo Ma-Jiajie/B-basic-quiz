@@ -13,7 +13,7 @@ public class UserService {
     public List<User> getAllUsers() { return UserDataBaseMock.userProvider(); }
     public User getUserById(long id) {
         Optional<User> optionalUser = UserDataBaseMock.findUserById(id);
-        if(optionalUser.isEmpty()) throw new UserNotFoundException("查无此人");
+        if(optionalUser.isPresent()) throw new UserNotFoundException("查无此人");
         return optionalUser.get();
     }
     public User addUser(User user) {
