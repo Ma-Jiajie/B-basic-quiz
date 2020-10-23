@@ -26,7 +26,9 @@ public class UserController {
 
     @PostMapping("/users")
     public User addUser(@RequestBody @Valid UserRequestDTO userRequestDTO) {
+        //TODO GTB-工程实践: - 不要根据当前 users 的数量来生成id，以后有了删除功能后，会生产重复的 id 的
         long id = userService.getAllUsers().size();
+        //TODO GTB-工程实践: - “id+1”？生成的时候就确定好，不要在每次使用的时候去 +1
         User user = new User(id+1,userRequestDTO.getName(),userRequestDTO.getAge(),userRequestDTO.getAvatar(),userRequestDTO.getDescription());
         return userService.addUser(user);
     }
