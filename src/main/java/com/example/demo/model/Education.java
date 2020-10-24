@@ -15,14 +15,12 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @Entity
 public class Education {
-
-    @NotNull
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long userId;
+    private Long educationId;
 
     @NotNull
-    private long year;
+    private Long year;
 
     @NotNull
     @Length(min = 1, max = 256, message = "tittle长度不合法")

@@ -23,7 +23,7 @@ public class User {
     @NotNull
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @NotNull
     @Length(min=1, max=128, message = "name长度不合法")
@@ -31,7 +31,7 @@ public class User {
 
     @NotNull
     @Min(value = 17, message = "年龄不合法")
-    private long age;
+    private Long age;
 
     @NotNull
     @Length(min=8 ,max = 512, message = "avatar长度不合法")

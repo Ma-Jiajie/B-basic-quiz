@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.controller.requestdto.UserRequestDTO;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.selfexception.UserNotFoundException;
@@ -20,7 +21,15 @@ public class UserService {
                 .orElseThrow(() -> new UserNotFoundException("User Not Found!"));
     }
 
-    public User createUser(User user) {
+    public User createUser(UserRequestDTO userRequestDTO) {
+        User user = new User(
+                userIdSeq.incrementAndGet(),
+                userRequestDTO.getName(),
+                userRequestDTO.getAge(),
+                userRequestDTO.getAvatar(),
+                userRequestDTO.getDescription()
+        );
+
         userRepository.save(user);
         return user;
     }
