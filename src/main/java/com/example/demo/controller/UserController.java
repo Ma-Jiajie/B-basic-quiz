@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.controller.requestdto.UserRequestDTO;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -22,6 +23,7 @@ public class UserController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public User createUser(@RequestBody @Valid UserRequestDTO userRequestDTO) {
         return userService.createUser(userRequestDTO);
     }
