@@ -33,7 +33,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.*;
 
-//都是挂掉的 错误信息：Failed to load ApplicationContext
+//Todo: test fail: Failed to load ApplicationContext
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class EducationControllerTest {
     @MockBean
