@@ -82,11 +82,11 @@ public class EducationControllerTest {
     public void should_return_educationList_by_existingUserId_with_jsonPath() throws Exception {
         when(educationService.getEducationsByUserId(1L)).thenReturn(educations);
 
-        ResponseEntity<Education> responseEntity = restTemplate.getForEntity("/educations/{id}", Education.class, 1L);
+        ResponseEntity<Education[]> responseEntity = restTemplate.getForEntity("/users/{id}/educations", Education[].class, 1L);
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(responseEntity.getHeaders().getContentType()).isEqualTo(MediaType.APPLICATION_JSON);
-        assertThat(Objects.requireNonNull(responseEntity.getBody()).getYear()).isEqualTo(1999L);
+        assertThat(Objects.requireNonNull(responseEntity.getBody())[0].getYear()).isEqualTo(1999L);
 
         verify(educationService, times(1)).getEducationsByUserId(1L);
     }
@@ -95,8 +95,7 @@ public class EducationControllerTest {
     public void should_return_educationList_by_UserId_and_throw_User_Not_Found() throws Exception {
         when(educationService.getEducationsByUserId(1L)).thenThrow(new UserNotFoundException("User Not Found"));
 
-        //返回值不知道设置什么
-        ResponseEntity<Education> responseEntity = restTemplate.getForEntity("/educations/{id}", Education.class, 1L);
+        ResponseEntity<ErrorResult> responseEntity = restTemplate.getForEntity("/users/{id}/educations", ErrorResult.class, 1L);
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
         assertThat(responseEntity.getHeaders().getContentType()).isEqualTo(MediaType.APPLICATION_JSON);
@@ -109,24 +108,24 @@ public class EducationControllerTest {
     public void should_return_education_when_create_education_with_existingUserId() throws Exception {
         when(educationService.createEducation(1L, educationRequestDTO)).thenReturn(education);
 
-        ResponseEntity<Education> responseEntity = restTemplate.postForEntity("/educations/{id}", educationRequestDTO, Education.class);
+        ResponseEntity<Education> responseEntity = restTemplate.postForEntity("/users/{id}/educations", educationRequestDTO, Education.class, 1L);
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         assertThat(responseEntity.getHeaders().getContentType()).isEqualTo(MediaType.APPLICATION_JSON);
         assertThat(Objects.requireNonNull(responseEntity.getBody()).getYear()).isEqualTo(2001L);
 
-        verify(educationService, times(1)).getEducationsByUserId(1L);
+        verify(educationService, times(1)).createEducation(1L, educationRequestDTO);
     }
     @Test
     public void should_throw_User_Not_Found_when_create_education_with_UserId() throws Exception {
         when(educationService.createEducation(1L, educationRequestDTO)).thenThrow(new UserNotFoundException("User Not Found"));
 
-        ResponseEntity<Education> responseEntity = restTemplate.postForEntity("/educations/{id}", educationRequestDTO,Education.class);
+        ResponseEntity<ErrorResult> responseEntity = restTemplate.postForEntity("/users/{id}/educations", educationRequestDTO, ErrorResult.class, 1L);
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
         assertThat(responseEntity.getHeaders().getContentType()).isEqualTo(MediaType.APPLICATION_JSON);
         assertThat(Objects.requireNonNull(responseEntity.getBody())).isInstanceOf(ErrorResult.class);
 
-        verify(educationService, times(1)).getEducationsByUserId(1L);
+        verify(educationService, times(1)).createEducation(1L, educationRequestDTO);
     }
 }

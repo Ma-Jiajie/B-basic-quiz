@@ -24,14 +24,12 @@ public class EducationService {
 
     public List<Education> getEducationsByUserId(Long id) {
         User user = userService.findById(id);
-        if(user == null) throw new UserNotFoundException("User Not Found!");
         return educationRepository.findAllByUserId(id);
     }
 
     public Education createEducation(Long id, EducationRequestDTO educationRequestDTO) {
         User user = userService.findById(id);
 
-        if(user == null) throw new UserNotFoundException("User Not Found!");
         Education education = new Education(
                 educationIdSeq.incrementAndGet(),
                 educationRequestDTO.getYear(),

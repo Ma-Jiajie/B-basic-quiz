@@ -22,6 +22,7 @@ public class UserRepositoryTest {
     @Test
     void should_return_user_when_id_exists() {
         entityManager.persistAndFlush(User.builder()
+                .id(1L)
                 .name("Panda")
                 .age(24L)
                 .avatar("http://...")

@@ -24,6 +24,7 @@ public class EducationRepositoryTest {
     @Test
     void should_return_education_when_id_exists() {
         User firstUser = User.builder()
+                .id(1L)
                 .name("Panda")
                 .age(24L)
                 .avatar("http://...")
